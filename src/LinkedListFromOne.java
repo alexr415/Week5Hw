@@ -302,23 +302,27 @@ public class LinkedListFromOne<T extends Comparable<? super T>> implements ListF
 		if(items.length == 0){
 			return;
 		}
-		Node current= head;
-		int i=0;
+
 		if(head==null){
-			head=new Node(items[i]);
-			i++;
-			//size++;
+			head= new Node(items[0]);
+			size++;
+			Node tail=getNodeAt(size);
+			for(int i=1;i<items.length;i++){
+				tail.next = new Node (items[i]);
+				tail = tail.next;
+				size++;
+			}
+		}
+		else {
+			Node tail = getNodeAt(size);
+			for (T item : items) {
+
+				tail.next = new Node(item);
+				tail = tail.next;
+				size++;
+			}
 		}
 
-		while(current!=null){
-			current=current.next;
-		}
-
-		while(i< items.length){
-			current=new Node(items[i]);
-			current=current.next;
-			i++;
-		}
 	}
 	public T getMax() {
 		Node current = head;
